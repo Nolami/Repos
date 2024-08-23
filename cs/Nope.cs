@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 
 namespace MyApp
@@ -118,8 +119,86 @@ namespace MyApp
                     Console.Write(word);
                     break;
             }
-            
+            Console.WriteLine();
+            Console.Write("How many points do you have? ");
+            int point = int.Parse(Console.ReadLine());
 
+            switch (point)
+            {
+                case int n when (n >= 1 && n <= 3):
+                    point *= 10;
+                    Console.Write($"Amount of points {point}");
+                    break;
+                case int n when (n >= 4 && n <= 6):
+                    point *= 100;
+                    Console.Write($"Amount of points: {point}");
+                    break;
+                case int n when (n >= 7 && n <= 9):
+                    point *= 1000;
+                    Console.Write($"Amount of points: {point}");
+                    break;
+                case int n when (n <= 0 && n > 9):
+                    Console.WriteLine("Number is too big");
+                    break;
+            }
+            Console.WriteLine() ;
+            Console.Write("Insert a number from 0 to 999: ");
+            int high = int.Parse(Console.ReadLine());
+
+            if (high < 0 || high > 999)
+            {
+                Console.WriteLine("Out of range");
+            } else
+            {
+                string result = highWord(high); 
+                Console.WriteLine(result);
+            }
+
+        }
+        static string highWord(int high)
+        {
+            if (high == 0)
+            {
+                return "Zero";
+            }
+
+            string[] ones = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            string[] teens = { "", "", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+            string[] tens = { "", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+            string[] hundreds = { "", "one hundred", "Two hundred", "three hundred", "four hundred", "five hundred", "six hundred", "seven hundred", "eight hundred", "nine hundred" };
+
+            string words = "";
+
+            if (high >= 100)
+            {
+                words += hundreds[high / 100];
+                high %= 100;
+
+                if (high > 0)
+                {
+                    words += "and";
+                }
+            }
+            if (high >= 20)
+            {
+                words += tens[high / 10];
+                high %= 10;
+
+                if (high > 0)
+                {
+                    words += "-";
+                }
+            }
+            else if (high >= 10)
+            {
+                words = tens[high - 10];
+                high = 0;
+            }
+            if (high > 0)
+            {
+                words += ones[high];
+            }
+            return words.Trim();
         }
     }
 }
