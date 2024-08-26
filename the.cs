@@ -10,12 +10,13 @@ namespace The
             private int due;
             private int types;
             private string name;
+            public static int calc = 0;
 
             public int Due() { return due; }
             public int Types() { return types; }
             public string Name() { return name; }
 
-            public int NewDue ()
+            public int NewDue()
             {
                 Console.WriteLine();
                 Console.Write("Give new due date amount: ");
@@ -28,13 +29,14 @@ namespace The
                 due = 0;
                 types = 0;
                 name = "";
-
+                calc++;
             }
             public Lib(int u_due, int u_types, string u_name)
             {
                 due = u_due;
                 types = u_types;
                 name = u_name;
+                calc++;
             }
         }
         static void Main(string[] args)
@@ -63,6 +65,8 @@ namespace The
             Console.WriteLine($"Type: {ty}");
             Console.WriteLine($"Name: {na}");
 
+            Console.WriteLine();
+            Console.WriteLine($"Total amount: {Lib.calc}");
         }
     }
 }
